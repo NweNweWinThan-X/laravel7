@@ -1971,15 +1971,15 @@ __webpack_require__.r(__webpack_exports__);
     addPost: function addPost() {
       var _this = this;
 
-      this.axios.post('http://localhost:8000/api/post/add', this.post).then(function (response) {
+      this.axios.post("api/post/add", this.post).then(function (response) {
         return _this.$router.push({
-          name: 'home'
-        }) // console.log(response.data)
-        ;
+          name: "home"
+        });
       })["catch"](function (error) {
         return console.log(error);
       })["finally"](function () {
-        return _this.loading = false;
+        _this.loading = false;
+        console.log(response.data);
       });
     }
   }
@@ -2031,6 +2031,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2040,7 +2043,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    this.axios.get('http://localhost:8000/api/posts').then(function (response) {
+    this.axios.get("api/posts").then(function (response) {
       _this.posts = response.data;
     });
   },
@@ -2101,7 +2104,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    this.axios.get("http://localhost:8000/api/post/edit/".concat(this.$route.params.id)).then(function (response) {
+    this.axios.get("api/post/edit/".concat(this.$route.params.id)).then(function (response) {
       _this.post = response.data; // console.log(response.data);
     });
   },
@@ -2109,9 +2112,9 @@ __webpack_require__.r(__webpack_exports__);
     updatePost: function updatePost() {
       var _this2 = this;
 
-      this.axios.post("http://localhost:8000/api/post/update/".concat(this.$route.params.id), this.post).then(function (response) {
+      this.axios.post("api/post/update/".concat(this.$route.params.id), this.post).then(function (response) {
         _this2.$router.push({
-          name: 'home'
+          name: "home"
         });
       });
     }
@@ -19833,7 +19836,7 @@ var staticRenderFns = [
         staticStyle: { margin: "20px 0px 20px 0px" }
       },
       [
-        _c("span", { staticClass: "text-secondary" }, [
+        _c("span", { staticClass: "text-secondary h3" }, [
           _vm._v("Laravel Vue CRUD Example")
         ])
       ]
@@ -19964,6 +19967,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("h3", { staticClass: "text-center" }, [_vm._v("All Posts")]),
+    _vm._v(" "),
     _c("br"),
     _vm._v(" "),
     _c("table", { staticClass: "table table-bordered" }, [
@@ -19991,16 +19995,16 @@ var render = function() {
                   _c(
                     "router-link",
                     {
-                      staticClass: "btn btn-primary",
+                      staticClass: "btn btn-sm btn-outline-primary",
                       attrs: { to: { name: "edit", params: { id: post.id } } }
                     },
-                    [_vm._v("Edit\n                    ")]
+                    [_vm._v("Edit")]
                   ),
                   _vm._v(" "),
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-danger",
+                      staticClass: "btn btn-sm btn-outline-danger",
                       on: {
                         click: function($event) {
                           return _vm.deletePost(post.id)
