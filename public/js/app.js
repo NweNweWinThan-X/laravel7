@@ -2051,7 +2051,7 @@ __webpack_require__.r(__webpack_exports__);
     deletePost: function deletePost(id) {
       var _this2 = this;
 
-      this.axios["delete"]("http://localhost:8000/api/post/delete/".concat(id)).then(function (response) {
+      this.axios["delete"]("api/post/delete/".concat(id)).then(function (response) {
         var i = _this2.posts.map(function (item) {
           return item.id;
         }).indexOf(id); // find index of your object
@@ -2102,17 +2102,21 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    var _this = this;
-
-    this.axios.get("api/post/edit/".concat(this.$route.params.id)).then(function (response) {
-      _this.post = response.data; // console.log(response.data);
-    });
+    this.getPost();
   },
   methods: {
+    getPost: function getPost() {
+      var _this = this;
+
+      console.log();
+      this.axios.get("/api/post/edit/".concat(this.$route.params.id)).then(function (response) {
+        _this.post = response.data;
+      });
+    },
     updatePost: function updatePost() {
       var _this2 = this;
 
-      this.axios.post("api/post/update/".concat(this.$route.params.id), this.post).then(function (response) {
+      this.axios.post("/api/post/update/".concat(this.$route.params.id), this.post).then(function (response) {
         _this2.$router.push({
           name: "home"
         });
@@ -20004,7 +20008,8 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-sm btn-outline-danger",
+                      staticClass:
+                        "btn btn-sm btn-outline-danger border-left-0",
                       on: {
                         click: function($event) {
                           return _vm.deletePost(post.id)

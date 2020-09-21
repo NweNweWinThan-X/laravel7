@@ -27,7 +27,7 @@
                 :to="{name: 'edit', params: { id: post.id }}"
                 class="btn btn-sm btn-outline-primary"
               >Edit</router-link>
-              <button class="btn btn-sm btn-outline-danger" @click="deletePost(post.id)">Delete</button>
+              <button class="btn btn-sm btn-outline-danger border-left-0" @click="deletePost(post.id)">Delete</button>
             </div>
           </td>
         </tr>
@@ -51,7 +51,7 @@ export default {
   methods: {
     deletePost(id) {
       this.axios
-        .delete(`http://localhost:8000/api/post/delete/${id}`)
+        .delete(`api/post/delete/${id}`)
         .then((response) => {
           let i = this.posts.map((item) => item.id).indexOf(id); // find index of your object
           this.posts.splice(i, 1);

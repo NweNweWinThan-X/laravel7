@@ -27,17 +27,20 @@ export default {
     };
   },
   created() {
-    this.axios
-      .get(`api/post/edit/${this.$route.params.id}`)
-      .then((response) => {
-        this.post = response.data;
-        // console.log(response.data);
-      });
+    this.getPost();
   },
   methods: {
+    getPost() {
+      console.log()
+      this.axios
+        .get(`/api/post/edit/${this.$route.params.id}`)
+        .then((response) => {
+          this.post = response.data;
+        });
+    },
     updatePost() {
       this.axios
-        .post(`api/post/update/${this.$route.params.id}`, this.post)
+        .post(`/api/post/update/${this.$route.params.id}`, this.post)
         .then((response) => {
           this.$router.push({ name: "home" });
         });
