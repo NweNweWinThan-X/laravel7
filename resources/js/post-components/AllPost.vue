@@ -55,7 +55,6 @@ export default {
       this.axios
         .get("/api/posts")
         .then((response) => {
-          console.log(response.data);
           this.posts = response.data;
         })
         .catch((error) => console.log(error));
