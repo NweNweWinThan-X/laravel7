@@ -31,19 +31,20 @@ export default {
   },
   methods: {
     getPost() {
-      console.log()
       this.axios
         .get(`/api/post/edit/${this.$route.params.id}`)
         .then((response) => {
           this.post = response.data;
-        });
+        })
+        .catch((error) => console.log(error));
     },
     updatePost() {
       this.axios
         .post(`/api/post/update/${this.$route.params.id}`, this.post)
         .then((response) => {
           this.$router.push({ name: "home" });
-        });
+        })
+        .catch((error) => console.log(error));
     },
   },
 };

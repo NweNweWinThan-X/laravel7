@@ -29,11 +29,10 @@ export default {
   methods: {
     addPost() {
       this.axios
-        .post("api/post/add", this.post)
+        .post("/api/post/add", this.post)
         .then((response) => this.$router.push({ name: "home" }))
         .catch((error) => console.log(error))
         .finally(() => {
-          this.loading = false;
           console.log(response.data);
         });
     },

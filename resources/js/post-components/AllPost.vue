@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="post in posts" :key="post.id">
+        <tr v-for="post in posts.data" :key="post.id">
           <td>{{ post.id }}</td>
           <td>{{ post.title }}</td>
           <td>{{ post.description }}</td>
@@ -27,12 +27,16 @@
                 :to="{name: 'edit', params: { id: post.id }}"
                 class="btn btn-sm btn-outline-primary"
               >Edit</router-link>
-              <button class="btn btn-sm btn-outline-danger border-left-0" @click="deletePost(post.id)">Delete</button>
+              <button
+                class="btn btn-sm btn-outline-danger border-left-0"
+                @click="deletePost(post.id)"
+              >Delete</button>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
+    <pagination :data="posts" @pagination-change-page="getPostsByPageId"></pagination>
   </div>
 </template>
  
@@ -40,22 +44,44 @@
 export default {
   data() {
     return {
-      posts: [],
+      posts: {},
     };
   },
   created() {
-    this.axios.get("api/posts").then((response) => {
-      this.posts = response.data;
-    });
+    this.getPostsByPageId();
   },
   methods: {
+    getPost() {
+      this.axios
+        .get("/api/posts")
+        .then((response) => {
+          console.log(response.data);
+          this.posts = response.data;
+        })
+        .catch((error) => console.log(error));
+    },
+    getPostsByPageId(page) {
+      if (typeof page === "undefined") {
+        page = 1;
+      }
+
+      this.$http
+        .get("/api/posts?page=" + page)
+        .then((response) => {
+          this.posts = response.data;
+        })
+        .catch((error) => console.log(error));
+    },
     deletePost(id) {
       this.axios
-        .delete(`api/post/delete/${id}`)
+        .delete(`/api/post/delete/${id}`)
         .then((response) => {
-          let i = this.posts.map((item) => item.id).indexOf(id); // find index of your object
+          // find index of your object
+          let i = this.posts.map((item) => item.id).indexOf(id);
+          // remove
           this.posts.splice(i, 1);
-        });
+        })
+        .catch((error) => console.log(error));
     },
   },
 };

@@ -1,6 +1,5 @@
 require('./bootstrap');
 window.Vue = require('vue');
-
 import App from './App.vue';
 import VueRouter from 'vue-router';
 import VueAxios from 'vue-axios';
@@ -9,6 +8,7 @@ import { routes } from './routers';
 
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
+Vue.component('pagination', require('laravel-vue-pagination'));
 
 const router = new VueRouter({
     mode: 'history',

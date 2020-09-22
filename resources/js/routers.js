@@ -1,4 +1,4 @@
-import AllPosts from './post-components/AllPost';
+import AllPost from './post-components/AllPost';
 import AddPost from './post-components/AddPost';
 import EditPost from './post-components/EditPost';
  
@@ -6,7 +6,7 @@ export const routes = [
     {
         name: 'home',
         path: '/',
-        component: AllPosts
+        component: AllPost
     },
     {
         name: 'add',
