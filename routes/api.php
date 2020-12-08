@@ -25,3 +25,12 @@ Route::group(['prefix' => 'post'], function () {
     Route::post('update/{id}', 'PostController@update');
     Route::delete('delete/{id}', 'PostController@destroy');
 });
+Route::get('test-cv', 'CVFileController@index');
+Route::group(['prefix' => 'uploadCVFile'], function () {
+    Route::post('add', 'CVFileController@create');
+    Route::get('edit/{id}', 'CVFileController@edit');
+    Route::post('update/{id}', 'CVFileController@update');
+    Route::delete('delete/{id}', 'CVFileController@destroy');
+});
+
+
